@@ -14,6 +14,10 @@
     - python-virtualenv
   when: ansible_pkg_mgr == "apt"
 
+- name: Install AWS agent on AWS Linux directly
+  yum: awslogs state=present
+  when: ansible_distribution == "Amazon"
+
 - name: ensure awslogs dirs exist
   file:
     state: directory
@@ -31,6 +35,7 @@
     version: 1.4.0
     extra_args: --upgrade
     virtualenv: "{{ awslogs_setup_home }}"
+  when: ansible_distribution != "Amazon"
 
 - name: ensure aws.conf is configured to use the awslogs plugin
   template:
