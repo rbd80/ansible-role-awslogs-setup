@@ -3,6 +3,8 @@
 # This is needed for aws.conf
 awslogs_setup_region: us-east-1
 
+awslogs_config: []
+
 # These may need to be overridden for some OSs (not sure which)
 awslogs_setup_nanny_ps:      /usr/bin/ps
 awslogs_setup_nanny_cat:     /usr/bin/cat

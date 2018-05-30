@@ -1,2 +1,4 @@
 ---
-# handlers file for awslogs-setup
+
+- name: restart awslogs
+  service: name=awslogsd state=restarted
