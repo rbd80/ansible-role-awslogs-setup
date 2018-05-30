@@ -14,7 +14,7 @@
     - python-virtualenv
   when: ansible_pkg_mgr == "apt"
 
-- name: install the latest version of Apache
+- name: On Amazon use yum to install
   yum:
     name: awslogs
     state: latest
@@ -96,3 +96,14 @@
     src:  nanny_cron.j2
     dest: /etc/cron.d/awslogs_nanny
     #when: ansible_service_mgr != 'systemd'
+
+- name: Systemd start
+  template:
+    src: daemon.j2
+    dest: /etc/init.d/awslogs
+    mode: 0755
+    #when: ansible_service_mgr != 'systemd'
+
+- name: Make sure a service is running
+  systemd: state=started name=awslogsd
+  when: ansible_service_mgr == 'systemd' and ansible_distribution == "Amazon"
