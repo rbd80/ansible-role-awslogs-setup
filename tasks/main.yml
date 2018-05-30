@@ -106,4 +106,4 @@
 
 - name: Make sure a service is running
   systemd: state=started name=awslogsd
-  when: ansible_service_mgr == 'systemd' and ansible_distribution == "Amazon"
+  when: ansible_distribution == "Amazon"
